@@ -32,12 +32,18 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="actions\action.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="dist\app-bundle.js" />
     <Content Include="dist\app-bundle.js.map" />
     <Content Include="index.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="reducers\index.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="reducers\searchReducer.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="server.js" />
@@ -63,13 +69,20 @@
     <TypeScriptCompile Include="components\Footer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="components\Landing.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="components\Navbar.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="components\SearchForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\" />
     <Folder Include="components\" />
+    <Folder Include="actions\" />
     <Folder Include="reducers\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

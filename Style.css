@@ -2,13 +2,10 @@
 #movie img {
     width:100%;
 }
-.brand-text {
-    font-size:2rem;
-}
 #react-logo {
     color:deepskyblue;
 }
-#imdb logo {
+#imdb-logo {
     color:gold;
 }
 @media (min-width:960px) {
