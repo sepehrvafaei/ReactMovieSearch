@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ReactMovieSearch", "ReactMovieSearch.njsproj", "{1BD35A56-9174-4AB9-9365-0439B16A3C7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BD35A56-9174-4AB9-9365-0439B16A3C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD35A56-9174-4AB9-9365-0439B16A3C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD35A56-9174-4AB9-9365-0439B16A3C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD35A56-9174-4AB9-9365-0439B16A3C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D407B9F-5DAC-448D-9EF9-9028246DEAC6}
+	EndGlobalSection
+EndGlobal
