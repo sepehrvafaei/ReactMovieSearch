@@ -1,7 +1,7 @@
 declare var require: any
 
 var React = require('react');
-import { search_movie } from '../actions/action';
+import { search_movie,fetch_movies } from '../actions/action';
 import { connect } from 'react-redux';
 
 class SearchForm extends React.Component {
@@ -9,12 +9,13 @@ class SearchForm extends React.Component {
         this.props.search_movie(event.target.value);
     };
     onSubmit = (event) => {
-
+        event.preventDefault();
+        this.props.fetch_movies(this.props.text);
     };
     render() {
         return (
             <div className='mx-auto w-50 mb-5'>
-                <form id='searchForm'>
+                <form id='searchForm' onSubmit={this.onSubmit}>
                     <div className='input-group'>
                         <input className="form-control" type="text"
                             placeholder="Search"
@@ -37,4 +38,4 @@ const mapStateToProps = (state) => ({
     text: state.searchReducer.text
 });
 
-export default connect(mapStateToProps, { search_movie })(SearchForm);
+export default connect(mapStateToProps, { search_movie,fetch_movies })(SearchForm);
