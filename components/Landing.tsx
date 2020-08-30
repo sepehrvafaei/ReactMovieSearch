@@ -22,4 +22,4 @@ const mapStateToProps = (state) => ({
     loading: state.searchReducer.loading
 });
 
-export default connect(mapStateToProps, null)(SearchForm);
+export default connect(mapStateToProps, null)(Landing);

@@ -3,10 +3,11 @@ declare var require: any
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-export class MovieCard extends React.Component {
+class MovieCard extends React.Component {
     render() {
         return (
             <div>
+                
             </div>
         );
     }

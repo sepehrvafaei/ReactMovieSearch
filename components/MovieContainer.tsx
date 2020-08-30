@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import MovieCard from './Moviecard';
 
 
-export class MovieContainer extends React.Component {
+class MovieContainer extends React.Component {
     render() {
         let list = '';
         list = this.props.movies.length > 0 ?
@@ -21,8 +21,8 @@ export class MovieContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    movies: state.SearchReducer.movies
-}
+const mapStateToProps = (state) => ({
+    movies: state.searchReducer.movies
+});
 
 export default connect(mapStateToProps, null)(MovieContainer);

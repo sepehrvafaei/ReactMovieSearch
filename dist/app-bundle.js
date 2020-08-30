@@ -112,8 +112,9 @@ const fetch_movies = (text) => ((dispatch) => {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(`http://www.omdbapi.com/?apikey=33654926&s=${text}`)
         .then(res => dispatch({
             type: 'FETCH_MOVIES',
-            payload: res.data
-        }));
+            payload: res.data.Search
+        }))
+        .catch(error => { console.log(error) });
 });
 
 /***/ }),
@@ -218,6 +219,9 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var SearchForm_1 = __webpack_require__(/*! ./SearchForm */ "./components/SearchForm.tsx");
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var Spinner_1 = __webpack_require__(/*! ./Spinner */ "./components/Spinner.tsx");
+var MovieContainer_1 = __webpack_require__(/*! ./MovieContainer */ "./components/MovieContainer.tsx");
 var Landing = /** @class */ (function (_super) {
     __extends(Landing, _super);
     function Landing() {
@@ -225,12 +229,109 @@ var Landing = /** @class */ (function (_super) {
     }
     Landing.prototype.render = function () {
         return (React.createElement("div", { className: 'container' },
-            React.createElement(SearchForm_1.default, null)));
+            React.createElement(SearchForm_1.default, null),
+            this.props.loading ? React.createElement(Spinner_1.default, null) : React.createElement(MovieContainer_1.default, null)));
     };
     ;
     return Landing;
 }(React.Component));
-exports.default = Landing;
+var mapStateToProps = function (state) { return ({
+    loading: state.searchReducer.loading
+}); };
+exports.default = react_redux_1.connect(mapStateToProps, null)(Landing);
+
+
+/***/ }),
+
+/***/ "./components/MovieContainer.tsx":
+/*!***************************************!*\
+  !*** ./components/MovieContainer.tsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var Moviecard_1 = __webpack_require__(/*! ./Moviecard */ "./components/Moviecard.tsx");
+var MovieContainer = /** @class */ (function (_super) {
+    __extends(MovieContainer, _super);
+    function MovieContainer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MovieContainer.prototype.render = function () {
+        var list = '';
+        list = this.props.movies.length > 0 ?
+            this.props.movies.map(function (movie, index) {
+                return React.createElement(Moviecard_1.default, { key: index, movie: movie });
+            })
+            : null;
+        return (React.createElement("div", { className: 'row' },
+            list,
+            "hello"));
+    };
+    return MovieContainer;
+}(React.Component));
+var mapStateToProps = function (state) { return ({
+    movies: state.searchReducer.movies
+}); };
+exports.default = react_redux_1.connect(mapStateToProps, null)(MovieContainer);
+
+
+/***/ }),
+
+/***/ "./components/Moviecard.tsx":
+/*!**********************************!*\
+  !*** ./components/Moviecard.tsx ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var MovieCard = /** @class */ (function (_super) {
+    __extends(MovieCard, _super);
+    function MovieCard() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MovieCard.prototype.render = function () {
+        return (React.createElement("div", null, "test"));
+    };
+    return MovieCard;
+}(React.Component));
+exports.default = MovieCard;
 
 
 /***/ }),
@@ -313,6 +414,29 @@ var mapStateToProps = function (state) { return ({
     text: state.searchReducer.text
 }); };
 exports.default = react_redux_1.connect(mapStateToProps, { search_movie: action_1.search_movie, fetch_movies: action_1.fetch_movies })(SearchForm);
+
+
+/***/ }),
+
+/***/ "./components/Spinner.tsx":
+/*!********************************!*\
+  !*** ./components/Spinner.tsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+function default_1(props) {
+    return (React.createElement("div", { className: 'mx-auto w-25' },
+        React.createElement("button", { class: "btn btn-primary", disabled: true },
+            React.createElement("span", { class: "spinner-border spinner-border-sm" }),
+            "Loading..")));
+}
+exports.default = default_1;
 
 
 /***/ }),
@@ -34405,9 +34529,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/action */ "./actions/action.js");
-
-
 const initialState = {
     text:'',
     movies: [],

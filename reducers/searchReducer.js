@@ -1,5 +1,3 @@
-import { search_movie } from '../actions/action';
-
 const initialState = {
     text:'',
     movies: [],
