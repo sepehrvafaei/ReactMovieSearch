@@ -22,10 +22,10 @@ class Movie extends React.Component {
                                 <strong>Released:</strong> {this.props.movie.Released}
                             </li>
                             <li className='list-group-item'>
-                                <strong>Rated:</strong> sth
+                                <strong>Rated:</strong> {this.props.movie.Rated}
                             </li>
                             <li className='list-group-item'>
-                                <strong>IMDB Rating:</strong> sth
+                                <strong>IMDB Rating:</strong> {this.props.movie.imdbRating}
                             </li>
                             <li className='list-group-item'>
                                 <strong>Director:</strong> {this.props.movie.Director}

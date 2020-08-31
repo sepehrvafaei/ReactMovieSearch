@@ -18,11 +18,10 @@ export default function (state = initialState,action) {
                 ...state,
                 movies:action.payload
             }
-        case 'GET_MOVIE':
-            const wanted = state.movies.find(x => x.imdbID === action.payload);
+        case 'FETCH_MOVIE':
             return {
                 ...state,
-                movie:wanted
+                movie: action.payload
             }
         default:
             return state;

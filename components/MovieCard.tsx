@@ -4,10 +4,10 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { get_movie } from '../actions/action';
+import { fetch_movie } from '../actions/action';
 
 class MovieCard extends React.Component {
-    handleDetail = (id) => { this.props.get_movie(id); }
+    handleDetail = (id) => { this.props.fetch_movie(id); }
     render() {
         const { movie } = this.props;
         return (
@@ -32,4 +32,4 @@ class MovieCard extends React.Component {
 }
 
 
-export default connect(null, {get_movie})(MovieCard);
+export default connect(null, {fetch_movie})(MovieCard);

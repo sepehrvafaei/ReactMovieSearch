@@ -90,14 +90,14 @@
 /*!***************************!*\
   !*** ./actions/action.js ***!
   \***************************/
-/*! exports provided: search_movie, fetch_movies, get_movie */
+/*! exports provided: search_movie, fetch_movies, fetch_movie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search_movie", function() { return search_movie; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch_movies", function() { return fetch_movies; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get_movie", function() { return get_movie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch_movie", function() { return fetch_movie; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -118,11 +118,13 @@ const fetch_movies = (text) => ((dispatch) => {
         .catch(error => { console.log(error) });
 });
 
-const get_movie = (id) => ((dispatch) => {
-    return dispatch({
-        type: 'GET_MOVIE',
-        payload:id
-    });
+const fetch_movie = (id) => ((dispatch) => {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(`http://www.omdbapi.com/?apikey=33654926&i=${id}`)
+        .then(res => dispatch({
+            type: 'FETCH_MOVIE',
+            payload: res.data
+        }))
+        .catch(error => { console.log(error) });
 });
 
 /***/ }),
@@ -293,9 +295,7 @@ var Movie = /** @class */ (function (_super) {
                 React.createElement("div", { className: 'col-md-4' },
                     React.createElement("img", { src: this.props.movie.Poster, alt: 'Poster' })),
                 React.createElement("div", { className: 'col-md-8' },
-                    React.createElement("h2", { className: 'mb-4' },
-                        "Title",
-                        this.props.movie.Title),
+                    React.createElement("h2", { className: 'mb-4' }, this.props.movie.Title),
                     React.createElement("ul", { className: 'list-group' },
                         React.createElement("li", { className: 'list-group-item' },
                             React.createElement("strong", null, "Genre:"),
@@ -307,10 +307,12 @@ var Movie = /** @class */ (function (_super) {
                             this.props.movie.Released),
                         React.createElement("li", { className: 'list-group-item' },
                             React.createElement("strong", null, "Rated:"),
-                            " sth"),
+                            " ",
+                            this.props.movie.Rated),
                         React.createElement("li", { className: 'list-group-item' },
                             React.createElement("strong", null, "IMDB Rating:"),
-                            " sth"),
+                            " ",
+                            this.props.movie.imdbRating),
                         React.createElement("li", { className: 'list-group-item' },
                             React.createElement("strong", null, "Director:"),
                             " ",
@@ -419,7 +421,7 @@ var MovieCard = /** @class */ (function (_super) {
     __extends(MovieCard, _super);
     function MovieCard() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.handleDetail = function (id) { _this.props.get_movie(id); };
+        _this.handleDetail = function (id) { _this.props.fetch_movie(id); };
         return _this;
     }
     MovieCard.prototype.render = function () {
@@ -439,7 +441,7 @@ var MovieCard = /** @class */ (function (_super) {
     };
     return MovieCard;
 }(React.Component));
-exports.default = react_redux_1.connect(null, { get_movie: action_1.get_movie })(MovieCard);
+exports.default = react_redux_1.connect(null, { fetch_movie: action_1.fetch_movie })(MovieCard);
 
 
 /***/ }),
@@ -37651,11 +37653,10 @@ const initialState = {
                 ...state,
                 movies:action.payload
             }
-        case 'GET_MOVIE':
-            const wanted = state.movies.find(x => x.imdbID === action.payload);
+        case 'FETCH_MOVIE':
             return {
                 ...state,
-                movie:wanted
+                movie: action.payload
             }
         default:
             return state;

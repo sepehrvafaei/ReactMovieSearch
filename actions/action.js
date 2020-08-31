@@ -16,9 +16,11 @@ export const fetch_movies = (text) => ((dispatch) => {
         .catch(error => { console.log(error) });
 });
 
-export const get_movie = (id) => ((dispatch) => {
-    return dispatch({
-        type: 'GET_MOVIE',
-        payload:id
-    });
+export const fetch_movie = (id) => ((dispatch) => {
+    axios.get(`http://www.omdbapi.com/?apikey=33654926&i=${id}`)
+        .then(res => dispatch({
+            type: 'FETCH_MOVIE',
+            payload: res.data
+        }))
+        .catch(error => { console.log(error) });
 });
