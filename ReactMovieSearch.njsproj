@@ -72,6 +72,9 @@
     <TypeScriptCompile Include="components\Landing.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="components\Movie.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="components\MovieCard.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

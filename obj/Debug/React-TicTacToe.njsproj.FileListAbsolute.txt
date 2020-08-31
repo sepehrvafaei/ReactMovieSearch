@@ -1,0 +1,3 @@
+D:\webDevelopment\visual-studio-2019\React-TicTacToe\obj\Debug\React-TicTacToe.njsprojAssemblyReference.cache
+D:\webDevelopment\visual-studio-2019\React-TicTacToe\obj\Debug\React-TicTacToe.njsproj.CoreCompileInputs.cache
+D:\webDevelopment\visual-studio-2019\React-TicTacToe\bin\Microsoft.NodejsTools.WebRole.dll

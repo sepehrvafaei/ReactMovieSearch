@@ -2,7 +2,7 @@ const initialState = {
     text:'',
     movies: [],
     loading: false,
-    movie:[]
+    movie: {}
 };
 
 export default function (state = initialState,action) {
@@ -17,6 +17,12 @@ export default function (state = initialState,action) {
             return {
                 ...state,
                 movies:action.payload
+            }
+        case 'GET_MOVIE':
+            const wanted = state.movies.find(x => x.imdbID === action.payload);
+            return {
+                ...state,
+                movie:wanted
             }
         default:
             return state;

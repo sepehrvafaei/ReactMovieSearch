@@ -1,0 +1,3 @@
+D:\webDevelopment\visual-studio-2019\ReactMovieSearch\obj\Debug\ReactMovieSearch.njsprojAssemblyReference.cache
+D:\webDevelopment\visual-studio-2019\ReactMovieSearch\obj\Debug\ReactMovieSearch.njsproj.CoreCompileInputs.cache
+D:\webDevelopment\visual-studio-2019\ReactMovieSearch\bin\Microsoft.NodejsTools.WebRole.dll

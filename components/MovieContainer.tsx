@@ -14,8 +14,12 @@ class MovieContainer extends React.Component {
                 <MovieCard key={index} movie={movie}/>)
             : null;
         return (
-            <div className='row'>
-                {list}
+            <div className="py-5">
+                <div className="container">
+                    <div className="row">
+                        {list}
+                    </div>
+                </div>
             </div>
             );
     }

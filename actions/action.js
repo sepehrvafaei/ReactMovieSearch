@@ -15,3 +15,10 @@ export const fetch_movies = (text) => ((dispatch) => {
         }))
         .catch(error => { console.log(error) });
 });
+
+export const get_movie = (id) => ((dispatch) => {
+    return dispatch({
+        type: 'GET_MOVIE',
+        payload:id
+    });
+});
