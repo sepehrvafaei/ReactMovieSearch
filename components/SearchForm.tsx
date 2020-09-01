@@ -1,7 +1,7 @@
 declare var require: any
 
 var React = require('react');
-import { search_movie,fetch_movies } from '../actions/action';
+import { search_movie,fetch_movies,set_loading } from '../actions/action';
 import { connect } from 'react-redux';
 
 class SearchForm extends React.Component {
@@ -11,6 +11,7 @@ class SearchForm extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         this.props.fetch_movies(this.props.text);
+        this.props.set_loading();
     };
     render() {
         return (
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => ({
     text: state.searchReducer.text
 });
 
-export default connect(mapStateToProps, { search_movie,fetch_movies })(SearchForm);
+export default connect(mapStateToProps, { search_movie,fetch_movies,set_loading })(SearchForm);

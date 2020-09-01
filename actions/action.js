@@ -9,10 +9,19 @@ export const search_movie = (text) => ((dispatch) => {
 
 export const fetch_movies = (text) => ((dispatch) => {
     axios.get(`http://www.omdbapi.com/?apikey=33654926&s=${text}`)
-        .then(res => dispatch({
-            type: 'FETCH_MOVIES',
-            payload: res.data.Search
-        }))
+        .then(res => {
+            if (typeof(res.data.Search )=== 'undefined') {
+                return dispatch({
+                    type: 'FETCH_MOVIES',
+                    payload: []
+                });
+            } else {
+                return dispatch({
+                    type: 'FETCH_MOVIES',
+                    payload: res.data.Search
+                });
+            }
+        })
         .catch(error => { console.log(error) });
 });
 
@@ -24,3 +33,7 @@ export const fetch_movie = (id) => ((dispatch) => {
         }))
         .catch(error => { console.log(error) });
 });
+
+export const set_loading = () => {
+    return {type:'SET_LOADING'};
+}

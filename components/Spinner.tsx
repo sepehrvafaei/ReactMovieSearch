@@ -6,8 +6,8 @@ var ReactDOM = require('react-dom');
 export default function (props) {
     return (
         <div className='mx-auto w-25'>
-        <button class="btn btn-primary" disabled>
-            <span class="spinner-border spinner-border-sm"></span>
+        <button className="btn btn-primary" disabled>
+            <span className="spinner-border spinner-border-sm"></span>
             Loading..
         </button>
             </div>

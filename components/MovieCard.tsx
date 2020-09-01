@@ -4,10 +4,13 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { fetch_movie } from '../actions/action';
+import { fetch_movie,set_loading } from '../actions/action';
 
 class MovieCard extends React.Component {
-    handleDetail = (id) => { this.props.fetch_movie(id); }
+    handleDetail = (id) => {
+        this.props.fetch_movie(id);
+        this.props.set_loading();
+    }
     render() {
         const { movie } = this.props;
         return (

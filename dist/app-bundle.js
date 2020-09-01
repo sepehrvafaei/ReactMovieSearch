@@ -90,7 +90,7 @@
 /*!***************************!*\
   !*** ./actions/action.js ***!
   \***************************/
-/*! exports provided: search_movie, fetch_movies, fetch_movie */
+/*! exports provided: search_movie, fetch_movies, fetch_movie, set_loading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search_movie", function() { return search_movie; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch_movies", function() { return fetch_movies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch_movie", function() { return fetch_movie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_loading", function() { return set_loading; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -111,10 +112,19 @@ const search_movie = (text) => ((dispatch) => {
 
 const fetch_movies = (text) => ((dispatch) => {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(`http://www.omdbapi.com/?apikey=33654926&s=${text}`)
-        .then(res => dispatch({
-            type: 'FETCH_MOVIES',
-            payload: res.data.Search
-        }))
+        .then(res => {
+            if (typeof(res.data.Search )=== 'undefined') {
+                return dispatch({
+                    type: 'FETCH_MOVIES',
+                    payload: []
+                });
+            } else {
+                return dispatch({
+                    type: 'FETCH_MOVIES',
+                    payload: res.data.Search
+                });
+            }
+        })
         .catch(error => { console.log(error) });
 });
 
@@ -126,6 +136,10 @@ const fetch_movie = (id) => ((dispatch) => {
         }))
         .catch(error => { console.log(error) });
 });
+
+const set_loading = () => {
+    return {type:'SET_LOADING'};
+}
 
 /***/ }),
 
@@ -283,6 +297,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var Spinner_1 = __webpack_require__(/*! ./Spinner */ "./components/Spinner.tsx");
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var Movie = /** @class */ (function (_super) {
     __extends(Movie, _super);
@@ -290,46 +305,55 @@ var Movie = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Movie.prototype.render = function () {
-        return (React.createElement(React.Fragment, null,
-            React.createElement("div", { className: 'row' },
-                React.createElement("div", { className: 'col-md-4' },
-                    React.createElement("img", { src: this.props.movie.Poster, alt: 'Poster' })),
-                React.createElement("div", { className: 'col-md-8' },
-                    React.createElement("h2", { className: 'mb-4' }, this.props.movie.Title),
-                    React.createElement("ul", { className: 'list-group' },
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Genre:"),
-                            " ",
-                            this.props.movie.Genre),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Released:"),
-                            " ",
-                            this.props.movie.Released),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Rated:"),
-                            " ",
-                            this.props.movie.Rated),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "IMDB Rating:"),
-                            " ",
-                            this.props.movie.imdbRating),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Director:"),
-                            " ",
-                            this.props.movie.Director),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Writer:"),
-                            " ",
-                            this.props.movie.Writer),
-                        React.createElement("li", { className: 'list-group-item' },
-                            React.createElement("strong", null, "Actors:"),
-                            " ",
-                            this.props.movie.Actors))))));
+        if (this.props.loading) {
+            return React.createElement(Spinner_1.default, null);
+        }
+        else {
+            return (React.createElement(React.Fragment, null,
+                React.createElement("div", { className: 'row' },
+                    React.createElement("div", { className: 'col-md-4 card card-body' },
+                        React.createElement("img", { src: this.props.movie.Poster, alt: 'Poster' })),
+                    React.createElement("div", { className: 'col-md-8' },
+                        React.createElement("h2", { className: 'mb-4' }, this.props.movie.Title),
+                        React.createElement("ul", { className: 'list-group' },
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Genre:"),
+                                " ",
+                                this.props.movie.Genre),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Released:"),
+                                " ",
+                                this.props.movie.Released),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Rated:"),
+                                " ",
+                                this.props.movie.Rated),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "IMDB Rating:"),
+                                " ",
+                                this.props.movie.imdbRating),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Director:"),
+                                " ",
+                                this.props.movie.Director),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Writer:"),
+                                " ",
+                                this.props.movie.Writer),
+                            React.createElement("li", { className: 'list-group-item' },
+                                React.createElement("strong", null, "Actors:"),
+                                " ",
+                                this.props.movie.Actors)))),
+                React.createElement("div", { className: 'bg-dark mx-auto w-50 text-white' },
+                    React.createElement("h3", null, "Summary"),
+                    React.createElement("p", null, this.props.movie.Plot))));
+        }
     };
     return Movie;
 }(React.Component));
 var mapStateToProps = function (state) { return ({
-    movie: state.searchReducer.movie
+    movie: state.searchReducer.movie,
+    loading: state.searchReducer.loading
 }); };
 exports.default = react_redux_1.connect(mapStateToProps, null)(Movie);
 
@@ -421,7 +445,10 @@ var MovieCard = /** @class */ (function (_super) {
     __extends(MovieCard, _super);
     function MovieCard() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.handleDetail = function (id) { _this.props.fetch_movie(id); };
+        _this.handleDetail = function (id) {
+            _this.props.fetch_movie(id);
+            _this.props.set_loading();
+        };
         return _this;
     }
     MovieCard.prototype.render = function () {
@@ -505,6 +532,7 @@ var SearchForm = /** @class */ (function (_super) {
         _this.onSubmit = function (event) {
             event.preventDefault();
             _this.props.fetch_movies(_this.props.text);
+            _this.props.set_loading();
         };
         return _this;
     }
@@ -523,7 +551,7 @@ var SearchForm = /** @class */ (function (_super) {
 var mapStateToProps = function (state) { return ({
     text: state.searchReducer.text
 }); };
-exports.default = react_redux_1.connect(mapStateToProps, { search_movie: action_1.search_movie, fetch_movies: action_1.fetch_movies })(SearchForm);
+exports.default = react_redux_1.connect(mapStateToProps, { search_movie: action_1.search_movie, fetch_movies: action_1.fetch_movies, set_loading: action_1.set_loading })(SearchForm);
 
 
 /***/ }),
@@ -542,8 +570,8 @@ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 function default_1(props) {
     return (React.createElement("div", { className: 'mx-auto w-25' },
-        React.createElement("button", { class: "btn btn-primary", disabled: true },
-            React.createElement("span", { class: "spinner-border spinner-border-sm" }),
+        React.createElement("button", { className: "btn btn-primary", disabled: true },
+            React.createElement("span", { className: "spinner-border spinner-border-sm" }),
             "Loading..")));
 }
 exports.default = default_1;
@@ -37651,13 +37679,20 @@ const initialState = {
         case 'FETCH_MOVIES':
             return {
                 ...state,
-                movies:action.payload
+                movies: action.payload,
+                loading:false
             }
         case 'FETCH_MOVIE':
             return {
                 ...state,
-                movie: action.payload
+                movie: action.payload,
+                loading:false
             }
+        case 'SET_LOADING':
+            return {
+                ...state,
+                loading: true
+            };
         default:
             return state;
     }
