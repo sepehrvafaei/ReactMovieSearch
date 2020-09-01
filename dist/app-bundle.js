@@ -113,15 +113,15 @@ const search_movie = (text) => ((dispatch) => {
 const fetch_movies = (text) => ((dispatch) => {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(`http://www.omdbapi.com/?apikey=33654926&s=${text}`)
         .then(res => {
-            if (typeof(res.data.Search )=== 'undefined') {
+            if (res.data.Response==='True') {
                 return dispatch({
                     type: 'FETCH_MOVIES',
-                    payload: []
+                    payload: res.data.Search
                 });
             } else {
                 return dispatch({
                     type: 'FETCH_MOVIES',
-                    payload: res.data.Search
+                    payload:[]
                 });
             }
         })
@@ -344,7 +344,7 @@ var Movie = /** @class */ (function (_super) {
                                 React.createElement("strong", null, "Actors:"),
                                 " ",
                                 this.props.movie.Actors)))),
-                React.createElement("div", { className: 'bg-dark mx-auto w-50 text-white' },
+                React.createElement("div", { className: 'bg-dark mx-auto w-50 text-white mt-4' },
                     React.createElement("h3", null, "Summary"),
                     React.createElement("p", null, this.props.movie.Plot))));
         }

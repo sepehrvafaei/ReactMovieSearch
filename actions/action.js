@@ -10,15 +10,15 @@ export const search_movie = (text) => ((dispatch) => {
 export const fetch_movies = (text) => ((dispatch) => {
     axios.get(`http://www.omdbapi.com/?apikey=33654926&s=${text}`)
         .then(res => {
-            if (typeof(res.data.Search )=== 'undefined') {
+            if (res.data.Response==='True') {
                 return dispatch({
                     type: 'FETCH_MOVIES',
-                    payload: []
+                    payload: res.data.Search
                 });
             } else {
                 return dispatch({
                     type: 'FETCH_MOVIES',
-                    payload: res.data.Search
+                    payload:[]
                 });
             }
         })
